@@ -77,7 +77,6 @@ project.ext.react = [
         entryFile: "index.js"
 ]
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 project.ext.vectoricons = [
         iconFontNames: ['Ionicons.ttf'] // Name of the font files you want to copy
 ]
@@ -195,7 +194,6 @@ dependencies {
     compile "com.facebook.react:react-native:+" //From node_modules
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile project(':RCTWeChat')
-    compile project(':react-native-code-push')
     compile project(':RNDeviceInfo')
     compile project(':react-native-vector-icons')
     compile project(':react-native-exceptions-manager')

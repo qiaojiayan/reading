@@ -28,7 +28,6 @@ import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.richardcao.exceptionsmanager.react.ExceptionsManager;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -87,7 +86,7 @@ public class MainApplication extends Application implements ReactApplication {
         @Nullable
         @Override
         protected String getJSBundleFile() {
-            return CodePush.getJSBundleFile();
+            return null;
         }
 
         @Override
@@ -101,7 +100,6 @@ public class MainApplication extends Application implements ReactApplication {
                     new MainReactPackage(),
                     new SplashScreenReactPackage(),
                     new WeChatPackage(),
-                    new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG),
                     new RNDeviceInfo(),
                     new VectorIconsPackage());
             ArrayList<ReactPackage> packageList = new ArrayList<>(packages);

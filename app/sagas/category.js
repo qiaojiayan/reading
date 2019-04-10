@@ -28,11 +28,15 @@ export function* requestTypeList() {
   try {
     yield put(fetchTypeList());
     const typeList = yield call(RequestUtil.request, WEXIN_ARTICLE_TYPE, 'get');
-    yield put(receiveTypeList(typeList.showapi_res_body.typeList));
-    yield call(store.save, 'typeList', typeList.showapi_res_body.typeList);
-    const errorMessage = typeList.showapi_res_error;
-    if (errorMessage && errorMessage !== '') {
-      yield ToastUtil.showShort(errorMessage);
+    if (!typeList) {
+      yield put(receiveTypeList(typeList.showapi_res_body.typeList));
+      yield call(store.save, 'typeList', typeList.showapi_res_body.typeList);
+      const errorMessage = typeList.showapi_res_error;
+      if (errorMessage && errorMessage !== '') {
+        yield ToastUtil.showShort(errorMessage);
+      }
+    } else {
+      throw new Error('test joe');
     }
   } catch (error) {
     yield put(receiveTypeList([]));
