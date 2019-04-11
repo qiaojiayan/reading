@@ -193,7 +193,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:26.1.0"
     compile "com.facebook.react:react-native:+" //From node_modules
     compile 'com.tencent.bugly:crashreport:latest.release'
-    compile project(':RCTWeChat')
     compile project(':RNDeviceInfo')
     compile project(':react-native-vector-icons')
     compile project(':react-native-exceptions-manager')

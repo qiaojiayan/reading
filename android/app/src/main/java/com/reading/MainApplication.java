@@ -31,7 +31,6 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.richardcao.exceptionsmanager.react.ExceptionsManager;
 import com.tencent.bugly.crashreport.CrashReport;
-import com.theweflex.react.WeChatPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
@@ -99,7 +98,6 @@ public class MainApplication extends Application implements ReactApplication {
             List<ReactPackage> packages = Arrays.asList(
                     new MainReactPackage(),
                     new SplashScreenReactPackage(),
-                    new WeChatPackage(),
                     new RNDeviceInfo(),
                     new VectorIconsPackage());
             ArrayList<ReactPackage> packageList = new ArrayList<>(packages);

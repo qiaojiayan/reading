@@ -21,24 +21,13 @@ import {
   WebView,
   BackHandler,
   Dimensions,
-  Text,
-  Image,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-  Modal
 } from 'react-native';
 
-import * as WeChat from 'react-native-wechat';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-navigation';
-import ToastUtil from '../../utils/ToastUtil';
 import LoadingView from '../../components/LoadingView';
-import { formatStringWithHtml } from '../../utils/FormatUtil';
 
 let canGoBack = false;
-const shareIconWechat = require('../../img/share_icon_wechat.png');
-const shareIconMoments = require('../../img/share_icon_moments.png');
 
 class WebViewPage extends React.Component {
   static navigationOptions = ({ navigation }) => ({
@@ -76,9 +65,10 @@ class WebViewPage extends React.Component {
   }
 
   onActionSelected = () => {
-    this.setState({
-      isShareModal: true
-    });
+    // this.setState({
+    //   isShareModal: true
+    // });
+    alert('Sharing has been removed');
   };
 
   onNavigationStateChange = (navState) => {
@@ -99,97 +89,10 @@ class WebViewPage extends React.Component {
   };
 
   renderLoading = () => <LoadingView />;
-
-  renderSpinner = () => {
-    const { params } = this.props.navigation.state;
-    return (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          this.setState({
-            isShareModal: false
-          });
-        }}
-      >
-        <View key="spinner" style={styles.spinner}>
-          <View style={styles.spinnerContent}>
-            <Text
-              style={[styles.spinnerTitle, { fontSize: 20, color: 'black' }]}
-            >
-              分享到
-            </Text>
-            <View style={styles.shareParent}>
-              <TouchableOpacity
-                style={styles.base}
-                onPress={() => {
-                  WeChat.isWXAppInstalled().then((isInstalled) => {
-                    if (isInstalled) {
-                      WeChat.shareToSession({
-                        title: formatStringWithHtml(params.article.title),
-                        description: '分享自：iReading',
-                        thumbImage: params.article.contentImg,
-                        type: 'news',
-                        webpageUrl: params.article.url
-                      }).catch((error) => {
-                        ToastUtil.showShort(error.message, true);
-                      });
-                    } else {
-                      ToastUtil.showShort('没有安装微信软件，请您安装微信之后再试', true);
-                    }
-                  });
-                }}
-              >
-                <View style={styles.shareContent}>
-                  <Image style={styles.shareIcon} source={shareIconWechat} />
-                  <Text style={styles.spinnerTitle}>微信</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.base}
-                onPress={() => {
-                  WeChat.isWXAppInstalled().then((isInstalled) => {
-                    if (isInstalled) {
-                      WeChat.shareToTimeline({
-                        title: formatStringWithHtml(`[@iReading]${params.article.title}`),
-                        thumbImage: params.article.contentImg,
-                        type: 'news',
-                        webpageUrl: params.article.url
-                      }).catch((error) => {
-                        ToastUtil.showShort(error.message, true);
-                      });
-                    } else {
-                      ToastUtil.showShort('没有安装微信软件，请您安装微信之后再试', true);
-                    }
-                  });
-                }}
-              >
-                <View style={styles.shareContent}>
-                  <Image style={styles.shareIcon} source={shareIconMoments} />
-                  <Text style={styles.spinnerTitle}>朋友圈</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  };
-
   render() {
     const { params } = this.props.navigation.state;
     return (
       <SafeAreaView style={styles.container}>
-        <Modal
-          animationType="fade"
-          visible={this.state.isShareModal}
-          transparent
-          onRequestClose={() => {
-            this.setState({
-              isShareModal: false
-            });
-          }}
-        >
-          {this.renderSpinner()}
-        </Modal>
         <WebView
           ref={(ref) => {
             this.webview = ref;

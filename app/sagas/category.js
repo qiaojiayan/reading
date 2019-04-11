@@ -28,16 +28,16 @@ export function* requestTypeList() {
   try {
     yield put(fetchTypeList());
     const typeList = yield call(RequestUtil.request, WEXIN_ARTICLE_TYPE, 'get');
-    if (!typeList) {
-      yield put(receiveTypeList(typeList.showapi_res_body.typeList));
-      yield call(store.save, 'typeList', typeList.showapi_res_body.typeList);
-      const errorMessage = typeList.showapi_res_error;
-      if (errorMessage && errorMessage !== '') {
-        yield ToastUtil.showShort(errorMessage);
-      }
-    } else {
-      throw new Error('test joe');
+    // if (!typeList) {
+    yield put(receiveTypeList(typeList.showapi_res_body.typeList));
+    yield call(store.save, 'typeList', typeList.showapi_res_body.typeList);
+    const errorMessage = typeList.showapi_res_error;
+    if (errorMessage && errorMessage !== '') {
+      yield ToastUtil.showShort(errorMessage);
     }
+    // } else {
+    // throw new Error('test joe');
+    // }
   } catch (error) {
     yield put(receiveTypeList([]));
     yield ToastUtil.showShort('网络发生错误，请重试');

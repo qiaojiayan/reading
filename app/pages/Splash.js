@@ -18,7 +18,6 @@
 import React from 'react';
 import { Dimensions, Animated } from 'react-native';
 import store from 'react-native-simple-store';
-import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
 import SplashScreen from 'react-native-splash-screen';
 import NavigationUtil from '../utils/NavigationUtil';
@@ -37,7 +36,6 @@ class Splash extends React.Component {
     this.state = {
       bounceValue: new Animated.Value(1)
     };
-    registerApp('wxb24c445773822c79');
     if (!AV.applicationId) {
       AV.init({
         appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
